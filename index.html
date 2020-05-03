@@ -149,18 +149,15 @@
         mouseout : onStateMouseOut
       });
     }
-
     //callback when mouse exits a state polygon goes here, for additional actions
     function onStateMouseOut(e){
       states.resetStyle(e.target);
       var stateName = e.target.feature.properties.name;
     }
-
     //callback for clicking inside a polygon
     function onStateClick(e){
     }
-
-    //Callback for when a state is highlighted
+    //callback for when a state is highlighted
     function onStateHighlight(e){
       var layer = e.target;
       layer.setStyle({

@@ -23,7 +23,9 @@ The primary functions used to create the spatial map are :
 - **`legend.onAdd = function ()`** that runs when the legend is added to map. <br>
 
 The new functions added to this leaflet project include:
-- **`layer.bindPopup("<h3>..</h3>" + feature.properties.variable + " " + "<h3>...</h3>" + feature.properties.variable);}`** for inserting information via the interactive element popups. Each time users click the marker, they would obtain further details about the aiport which include the name of the airport (*AIRPT_NAME*); the total number of passengers boarding by airlines (*TOT_ENP*) and the elevation above sea level (*ELEV*). The last two variables, number of passengers boarding (TOT_ENP) and elevation above sea level (ELEV) are two criteria commonly used by FAA to determine the eligibility of the airport to have or continue to have an airport traffic control tower.
+- **`function onStateMouseOut(e){}`** callback when mouse exits a state polygon goes here, for additional actions.
+- **`function onStateClick(e){}`** callback for clicking inside a polygon
+- **`function onStateHighlight(e)`** callback for when a state is highlighted
 
 ## :books: Libraries
 Below is the table that shows the data library of two geometric/spatial files used in this leaflet: **`airports.geojson`** and **`us-states.geojson`**.
