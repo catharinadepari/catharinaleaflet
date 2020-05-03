@@ -130,8 +130,7 @@
         };
     }
 
-    // 8. Add states polygons
-
+    // 8. Add states polygons from GeoJson file
     states = L.geoJson.ajax("assets/us-states.geojson", {
       onEachFeature: onEachFeature,
       style: style
