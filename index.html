@@ -131,6 +131,7 @@
     }
 
     // 8. Add states polygons
+
     states = L.geoJson.ajax("assets/us-states.geojson", {
       onEachFeature: onEachFeature,
       style: style
@@ -172,7 +173,7 @@
       var stateName = e.target.feature.properties.name;
       //callback when mouse enters state polygon goes here
     }
-    
+
     // 10. Create Leaflet Control Object for Legend
     var legend = L.control({position: 'topright'});
 

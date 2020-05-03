@@ -2,7 +2,7 @@
 var mymap = L.map('map', {
     center: [39.38, -97.92],
     zoom: 7,
-    maxZoom: 10,
+    maxZoom: 8,
     minZoom: 3,
     detectRetina: true});
 
@@ -13,16 +13,17 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(
 // Null variable that will hold cell tower data
 var controlTowers = null;
 
-// 4. Build up a set of colors from colorbrewer's dark2 category
-// there are 2 classes of airport will be represented here,
-// those with traffic control tower and those wthout it.
+// 4. Build up a set of colors from chroma category.
+// Two classes of airport will be defined here,
+// those with traffic control tower ATCTs and those without it.
 // There are 940 airports distributed in the 52 states
-// (505 with control towers; 435 without it)
-var colors = chroma.scale('Spectral').mode('lch').colors(2);
+// (505 airports with ATCTs; 435 without ATCTs)
+var colors = chroma.scale(['darkred', 'orange']).mode('lch').colors(2);
 
-// 5. dynamically append style classes to this page. This style classes will be used for colorize the markers.
+// 5. We dynamically append style classes to this page.
+// This style classes will be used for colorize the markers.
 for (i = 0; i < 2; i++) {
-    $('head').append($("<style> .marker-color-" + (i + 1).toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
+    $('head').append($("<style> .marker-color-" + (i + 1).toString() + " { color: " + colors[i] + "; font-size: 12px; text-shadow: 0 0 3px #ffffff;} </style>"));
 }
 
 // Get GeoJSON and put on it on the map when it loads
@@ -40,15 +41,12 @@ controlTowers= L.geoJson.ajax("assets/airports.geojson", {
         return L.marker(latlng, {
           icon: L.divIcon({className: 'fa fa-plane marker-color-' + (id + 1).toString() })});
     },
-    attribution: 'Air Traffic Control Towers Data &copy; US Government | US States Boundaries &copy; Mike Bostock of D3 | Base Map &copy; CartoDB | Made By Catharina Depari'
+    attribution: 'Airport & Traffic Control Towers Data &copy; US Government | US States Boundaries &copy; Mike Bostock of D3 | Base Map &copy; CartoDB | Made By Catharina Depari'
 }).addTo(mymap);
 
 // 6. Set function for color ramp for the traffic controls
 // towers which cover between 1 and 191 airports for one state
-colors = chroma.scale('OrRd').colors(7);
-//alternative colors = chroma.scale('YlGnBu'), YlOrRd YlOrBr YlGnBu YlGn credits
-// RdPu Purples PuRd OrRd Oranges Greys Greens GnBu BuPu BuGn Blues.colors(5);
-
+colors = chroma.scale('YlOrRd').colors(7);
 function setColor(density) {
     var id = 0;
     if (density > 60) { id = 6; }
@@ -66,25 +64,63 @@ function setColor(density) {
 function style(feature) {
     return {
         fillColor: setColor(feature.properties.count),
-        fillOpacity: 0.4,
-        weight: 2,
+        fillOpacity: 0.7,
+        weight: 3,
+        dashArray: '2',
         opacity: 1,
-        color: '#b4b4b4',
+        color: 'white',
         dashArray: '4'
     };
 }
 
-// 8. Add county polygons
-// create counties variable, and assign null to it.
-var counties = null;
-counties = L.geoJson.ajax("assets/us-states.geojson", {
-    style: style
+// 8. Add states polygons
+
+states = L.geoJson.ajax("assets/us-states.geojson", {
+  onEachFeature: onEachFeature,
+  style: style
 }).addTo(mymap);
 
-// 9. Create Leaflet Control Object for Legend
+// 9. Some Interactive Elements are added here.
+// Create GeoJson layer to pass arguments of functions to call when
+// certain events happen in each POLYGON in the GeoJson file (states)
+
+function onEachFeature(feature, layer){
+  layer.bindPopup("<h2>Name of the State</h2>" + feature.properties.name + " " +
+  "<h2>Number of Airports</h2>" + feature.properties.count);
+  layer.on({
+    click : onStateClick,
+    mouseover : onStateHighlight,
+    mouseout : onStateMouseOut
+  });
+}
+//callback when mouse exits a state polygon goes here, for additional actions
+function onStateMouseOut(e){
+  states.resetStyle(e.target);
+  var stateName = e.target.feature.properties.name;
+}
+//callback for clicking inside a polygon
+function onStateClick(e){
+}
+//callback for when a state is highlighted
+function onStateHighlight(e){
+  var layer = e.target;
+  layer.setStyle({
+    weight: 5,
+    color: 'darkred',
+    dashArray: '',
+    fillOpacity: 0.7
+  });
+  if (!L.Browser.ie && !L.Browser.opera) {
+    layer.bringToFront();
+  }
+  var stateName = e.target.feature.properties.name;
+  //callback when mouse enters state polygon goes here
+}
+
+// 10. Create Leaflet Control Object for Legend
 var legend = L.control({position: 'topright'});
 
-// 10. Function that runs when legend is added to map
+// 11. Function that runs when legend is added to map
 legend.onAdd = function () {
 
     // Create Div Element and Populate it with HTML
@@ -104,8 +140,8 @@ legend.onAdd = function () {
     return div;
 };
 
-// 11. Add a legend to map
+// 12. Add a legend to map
 legend.addTo(mymap);
 
-// 12. Add a scale bar to map
+// 13. Add a scale bar to map
 L.control.scale({position: 'bottomleft'}).addTo(mymap);
