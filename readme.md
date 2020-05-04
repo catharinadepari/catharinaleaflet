@@ -21,7 +21,7 @@ The primary functions used to create the spatial map are :
 - **`var legend = L.control({position:})`**` for creating leaflet control object for the legend
 - **`legend.onAdd = function ()`** that runs when the legend is added to map. <br>
 
-The new functions added to this leaflet project include:
+The new functions added to this leaflet project are associated with interactive elements which include:
 - **`function onStateMouseOut(e){}`** for calling back when mouse exits a state polygon goes here, for additional actions.
 - **`function onStateClick(e){}`** calling back for clicking inside a polygon from where users will find more details about each state (name of state and number of airports) and airport (the availability of ATCTs, name of the airport, elevation, and emplanement.
 - **`function onStateHighlight(e)`** calling back for when a state is highlighted due to users' interests.<br>
