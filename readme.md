@@ -56,11 +56,11 @@ The two data files are obtained from two different sources as described below:
 | basemap | tile layer | a tile layer for the basemap | <http://leaflet-extras.github.io/leaflet-providers/preview/> |
 
 ## :bulb: Analysis
-There are two interpretations that can be drawn from this spatial map.
+There are two interpretations that can be drawn from this spatial map where red icon represents the availability of ATCTs and yellow icon indicates the unavailability of ATCTs.
 - ***First***, the distribution of airports with traffic control tower (ATCTs) is uneven throughout the U.S. When we relate the ATCTs distribution with elevation, the assumption does not hold true. Alaska state, for instance. Despite it is the largest state in the U.S. with the highest number of airports, the number of airports with ATCTs in this state is relatively low, compared to those in, say, Washington State whose area size is lower than Alaska. There are only 10 airports with ATCTs out of more than 60 airports in Alaska while there are 15 airports with ATCTs out of 24 airports in Washington State.
 - ***Second***, the inconsistent conditions of the ATCTs in the U.S. shows the more complex considerations used by the FAA than what it may seem. For instance, Arizona State has an airport namely Sierra Vista Municipal Airport-Libby Army Airfield which has total passengers boarding of 968 and elevation of 4,662 m, and an ATCTs. While its other airport, the Show Low Regional Airport, has 3,080 passengers boarding and elevation of 6,415 m. This indicates that higher emplannement and elevation do not necessarily mean that the airport is more eligible to have a traffic control tower than another airport. <br>
 
-## :flags: Acknowledgement
+## :flags: Credits/Acknowledgement
 The credits for this project go to:
 - Professor Bo Zhao, the instructor of the GEOG 458 A at the University of Washington for the teaching materials and knowledge sharing.
 - United States Government for providing the data file through its open-sourced database.
