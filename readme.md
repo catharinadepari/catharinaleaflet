@@ -65,7 +65,6 @@ The credits for this project go to:
 - Professor Bo Zhao, the instructor of the GEOG 458 A at the University of Washington for the teaching materials and knowledge sharing.
 - United States Government for providing the data file through its open-sourced database.
 - Mike Bostock whose website is inspirational for  further leaflet exercises and provides data file for this project.
-- Leaflet
 - Patiphan Phengpao whose stategy of developing live server for leaflet preview (besides Atom and Google Chrome) is highly contributive <https://www.youtube.com/watch?v=FHOcQdu1iFM>. <br>
 
 ### :link: References <br>
