@@ -138,7 +138,6 @@
     // 9. Some Interactive Elements are added here.
     // Create GeoJson layer to pass arguments of functions to call when
     // certain events happen in each POLYGON in the GeoJson file (states)
-
     function onEachFeature(feature, layer){
       layer.bindPopup("<h2>Name of the State</h2>" + feature.properties.name + " " +
       "<h2>Number of Airports</h2>" + feature.properties.count);
