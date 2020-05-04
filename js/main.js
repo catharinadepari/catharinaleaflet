@@ -9,8 +9,8 @@ var mymap = L.map('map', {
 // 2. Add a tileLayer to add a base map.
 L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(mymap);
 
-// 3. Add airports' air traffic control towers GeoJSON Data
-// Null variable that will hold cell tower data
+// 3. Add airports' air traffic control towers from GeoJSON Data
+// by assigning null variable to hold cell tower data
 var controlTowers = null;
 
 // 4. Build up a set of colors from chroma category.
@@ -44,8 +44,8 @@ controlTowers= L.geoJson.ajax("assets/airports.geojson", {
     attribution: 'Airport & Traffic Control Towers Data &copy; US Government | US States Boundaries &copy; Mike Bostock of D3 | Base Map &copy; CartoDB | Made By Catharina Depari'
 }).addTo(mymap);
 
-// 6. Set function for color ramp for the traffic controls
-// towers which cover between 1 and 191 airports for one state
+// 6. Set function for color ramp for the traffic control
+// towers at airports throughout U.S.
 colors = chroma.scale('YlOrRd').colors(7);
 function setColor(density) {
     var id = 0;
@@ -73,14 +73,13 @@ function style(feature) {
     };
 }
 
-// 8. Add states polygons
-
+// 8. Add states polygons from GeoJson file, similar to step 5
 states = L.geoJson.ajax("assets/us-states.geojson", {
   onEachFeature: onEachFeature,
   style: style
 }).addTo(mymap);
 
-// 9. Some Interactive Elements are added here.
+// 9. Some interactive elements are added here.
 // Create GeoJson layer to pass arguments of functions to call when
 // certain events happen in each POLYGON in the GeoJson file (states)
 
