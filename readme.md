@@ -1,6 +1,6 @@
 # catharinaleaflet
 
-<img src="img/twitter_socialdistancing_map.png" width='950'> <br>
+<img src="img/leaflet.png" width='950'> <br>
 ## Spatial Distribution of Airport's Traffic Control Tower in the U.S.
 ### :newspaper: Introduction
 
